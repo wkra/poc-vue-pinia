@@ -1,0 +1,8 @@
+{
+  "name": "api-service",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "typescript": "latest"
+  }
+}
