@@ -2,8 +2,13 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { getUsers } from 'api-service'
 import type { User } from 'api-service'
+import { useTestStore } from './test'
+import { storeToRefs } from 'pinia'
 
 export const useUsersStore = defineStore('users', () => {
+  const testStore = useTestStore()
+  const { getDoubleTest } = storeToRefs(testStore)
+
   const list = ref<User[]>([])
   const page = ref(0)
   const count = computed(() => list.value.length)
@@ -33,5 +38,5 @@ export const useUsersStore = defineStore('users', () => {
     page.value = page.value + 1
   }
 
-  return { list, count, removeUser, fetchUsers }
+  return { list, count, removeUser, fetchUsers, getTestFromChild: getDoubleTest }
 })

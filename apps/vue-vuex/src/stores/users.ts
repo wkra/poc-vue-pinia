@@ -1,5 +1,6 @@
 import type { User } from 'api-service'
 import { getUsers } from 'api-service'
+import test from './test'
 
 export interface State {
   list: User[]
@@ -7,13 +8,21 @@ export interface State {
 }
 
 export default {
+  modules: {
+    test: {
+      ...test
+    }
+  },
   namespaced: true,
   state: {
     list: [],
     page: 0
   } as State,
   getters: {
-    count: (state: State) => state.list.length
+    count: (state: State) => state.list.length,
+    getTestFromChild: (state: State, getters: any) => {
+      return getters['test/getDoubleTest']
+    }
   },
   actions: {
     //TODO ANY for vuex context

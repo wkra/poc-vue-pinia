@@ -4,7 +4,7 @@ import { useUsersStore } from '@/stores/users'
 import { storeToRefs } from 'pinia'
 
 const usersStore = useUsersStore()
-const { list, count } = storeToRefs(usersStore)
+const { list, count, getTestFromChild: test } = storeToRefs(usersStore)
 const { removeUser, fetchUsers } = usersStore
 
 const fetchUsersHandler = async () => {
@@ -19,6 +19,7 @@ const removeUserHandler = (user: User) => {
 <template>
   <div>
     <button type="button" @click="fetchUsersHandler">Add users</button>
+    <div>Test data from nested store: {{ test }}</div>
     <div>Users number: {{ count }}</div>
     <ul>
       <li v-for="user in list" :key="user.id">
